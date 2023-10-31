@@ -1,0 +1,74 @@
+//
+//  Login.swift
+//  Test
+//
+//  Created by Osjk33 on 10/30/23.
+//
+
+import SwiftUI
+
+struct Login: View {
+    @State private var username = ""
+    @State private var password = ""
+    @State private var wrongUsername = 0
+    @State private var wrongPassword = 0
+    @State private var showingLoginScreen = false
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                Color.gray
+                    .ignoresSafeArea()
+                Circle()
+                    .scale(1.7)
+                    .foregroundColor(.white.opacity(0.15))
+                Circle()
+                    .scale(1.35)
+                    .foregroundColor(.white.opacity(0.15))
+                
+                VStack {
+                    Text("Please input your name")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding()
+                    TextField("Username", text: $username)
+                        .padding()
+                        .frame(width: 300, height: 50)
+                        .background(Color.black.opacity(0.05))
+                        .cornerRadius(10)
+                        .border(.red, width: CGFloat(wrongUsername))
+                    
+                    SecureField("Passowrd", text: $password)
+                        .padding()
+                        .frame(width: 300, height: 50)
+                        .background(Color.black.opacity(0.05))
+                        .cornerRadius(10)
+                        .border(.red, width: CGFloat(wrongPassword))
+                    
+                    Button("Login") {
+                        autheticateUser(username: username, password: password)
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 50)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    
+                    NavigationLink(destination: Text("You are loggined in @\(username)"), isActive: $showingLoginScreen) {
+                        EmptyView()
+                    }
+                }
+            }
+            .navigationBarHidden(true)
+
+        }
+            }
+    func autheticateUser(username: String, password: String) {
+      
+    }
+}
+
+struct Login_Previews: PreviewProvider {
+    static var previews: some View {
+        Login()
+    }
+}
